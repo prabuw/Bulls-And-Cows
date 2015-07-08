@@ -22,11 +22,13 @@ namespace BullsAndCows.Core
 
             for (var i = 0; i < guess.Length; i++)
             {
-                if (code[i] == guess[i])
+                var index = guess.IndexOf(code[i]);
+
+                if (index == i)
                 {
                     bulls++;
                 }
-                else if(guess.IndexOf(code[i]) >= 0)
+                else if (index >= 0)
                 {
                     cows++;
                 }
