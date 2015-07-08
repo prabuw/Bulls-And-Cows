@@ -10,56 +10,82 @@ namespace BullsAndCows.Tests
     {
         private readonly IVerifier _verifier;
 
+        private const string ExpectedCode = "1234";
+
+        private static IEnumerable<string> InvalidFormatGuesses
+        {
+            get
+            {
+                yield return "123A";
+                yield return "123$";
+                yield return "12 3";
+                yield return "ABC$";
+                yield return "!@#$";
+                yield return "    ";
+            }
+        }
+
+        private static IEnumerable<string> InvalidLengthGuesses
+        {
+            get
+            {
+                yield return "12345";
+                yield return "23";
+                yield return "";
+            }
+        }
+
+        private static IEnumerable<string> RepeatedValidCharacterGuesses
+        {
+            get
+            {
+                yield return "1111";
+                yield return "1223";
+                yield return "2234";
+            }
+        }
+
+        private static IEnumerable<string> GuessesContainingZero
+        {
+            get
+            {
+                yield return "1230";
+                yield return "0145";
+                yield return "2034";
+            }
+        }
+
         public VerifierTests()
         {
             _verifier = new Verifier();
         }
 
-        public IEnumerable<string> InvalidFormatGuesses
-        {
-            get
-            {
-                return new[] 
-                {
-                    "123A",
-                    "123$",
-                    "12 3",
-                    "ABC$",
-                    "!@#$",
-                    "    "
-                };
-            }
-        }
-
         [TestCaseSource("InvalidFormatGuesses")]
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Your guess is not in the valid format. It should be contain four unique digits, excluding zero.")]
         public void Verify_ThrowsAnException_IfGuessUsesInvalidCharacters(string guess)
-        {
-            var expectedCode = "1234";
-
-            _verifier.Verify(expectedCode, guess);
-        }
-
-        public IEnumerable<string> InvalidLengthGuesses
-        {
-            get
-            {
-                return new[] 
-                {
-                    "12345",
-                    "23",
-                    ""
-                };
-            }
+        {   
+            _verifier.Verify(ExpectedCode, guess);
         }
 
         [TestCaseSource("InvalidLengthGuesses")]
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Your guess is not in the valid format. It should be contain four unique digits, excluding zero.")]
         public void Verify_ThrowsAnException_IfGuessUsesMoreThanFourValidCharacters(string guess)
         {
-            var expectedCode = "1234";
+            _verifier.Verify(ExpectedCode, guess);
+        }
 
-            _verifier.Verify(expectedCode, guess);
+        [TestCaseSource("RepeatedValidCharacterGuesses")]
+        [ExpectedException(typeof (ArgumentException), ExpectedMessage = "Your guess is not in the valid format. It should be contain four unique digits, excluding zero.")]
+        public void Verify_ThrowsAnException_IfGuessContainsRepeatedNumbers(string guess)
+        {
+            _verifier.Verify(ExpectedCode, guess);
+        }
+
+        [TestCaseSource("GuessesContainingZero")]
+        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Your guess is not in the valid format. It should be contain four unique digits, excluding zero.")]
+        public void Verify_ThrowsAnException_IfGuessContainsZero(string guess)
+        {
+            _verifier.Verify(ExpectedCode, guess);
         }
     }
 }
