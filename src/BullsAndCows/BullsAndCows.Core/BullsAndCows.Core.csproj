@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeGenerator.cs" />
+    <Compile Include="ICodeGenerator.cs" />
     <Compile Include="IVerifier.cs" />
     <Compile Include="VerificationResult.cs" />
     <Compile Include="Verifier.cs" />

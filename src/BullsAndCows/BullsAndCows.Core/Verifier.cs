@@ -10,9 +10,9 @@ namespace BullsAndCows.Core
             const RegexOptions regexOptions = RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase;
 
             var isGuessValid = new Regex("^[1-9]{4}$", regexOptions);
-            var isGuessContainRepetition = new Regex("([1-9]{1})[^\\1]*\\1", regexOptions);
+            var isThereReptitionWithinTheGuess = new Regex("([1-9]{1})[^\\1]*\\1", regexOptions);
 
-            if (!isGuessValid.IsMatch(guess) || isGuessContainRepetition.IsMatch(guess))
+            if (!isGuessValid.IsMatch(guess) || isThereReptitionWithinTheGuess.IsMatch(guess))
             {
                 throw new ArgumentException("Your guess is not in the valid format. It should be contain four unique digits, excluding zero.");
             }
