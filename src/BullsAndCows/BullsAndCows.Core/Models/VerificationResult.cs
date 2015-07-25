@@ -1,4 +1,4 @@
-﻿namespace BullsAndCows.Core
+﻿namespace BullsAndCows.Core.Models
 {
     public class VerificationResult
     {

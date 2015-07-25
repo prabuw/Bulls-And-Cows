@@ -1,0 +1,13 @@
+1. Random Initial guess
+2. Ratify Guess
+3. Add ratified guess to guess history
+4. If a bull is determined, store digit and position, and remove it from allowed numbers.
+5. Create new guess based on history and determined value
+	a. If ratified guess has no cows or bulls then reduce allowedNumbers by digits in guess
+	b. If guess has cows (and bulls), then iterate order of digits in guess till cows become bulls
+		i. Do this one digit at a time
+		ii. Each iteration is a guess, and must run through from step 2 down.
+	c. If a ratified guess has an unknown bull, iterate through the unknown potential bulls by turning them into a cow 
+		i. Do this by swapping unknown potential bull with an allowed number
+		ii. Each iteration is a guess, and must run through from step 2 down.
+		

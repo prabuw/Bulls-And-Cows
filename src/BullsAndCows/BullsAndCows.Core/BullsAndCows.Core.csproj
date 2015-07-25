@@ -39,10 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\GeneratedGuess.cs" />
+    <Compile Include="Models\Guess.cs" />
+    <Compile Include="Models\GuessHistory.cs" />
     <Compile Include="CodeGenerator.cs" />
-    <Compile Include="ICodeGenerator.cs" />
-    <Compile Include="IVerifier.cs" />
-    <Compile Include="VerificationResult.cs" />
+    <Compile Include="CodeGuesser.cs" />
+    <Compile Include="GuessValidator.cs" />
+    <Compile Include="Interfaces\ICodeGenerator.cs" />
+    <Compile Include="Interfaces\ICodeGuesser.cs" />
+    <Compile Include="Interfaces\IGuessValidator.cs" />
+    <Compile Include="Interfaces\IVerifier.cs" />
+    <Compile Include="Models\RatifiedGuess.cs" />
+    <Compile Include="Models\VerificationResult.cs" />
     <Compile Include="Verifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

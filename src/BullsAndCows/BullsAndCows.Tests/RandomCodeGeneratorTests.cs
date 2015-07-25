@@ -1,18 +1,18 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using BullsAndCows.Core;
+using BullsAndCows.Core.Interfaces;
 using NUnit.Framework;
 
 namespace BullsAndCows.Tests
 {
     [TestFixture]
-    public class CodeGeneratorTests
+    public class RandomCodeGeneratorTests
     {
-        private readonly ICodeGenerator _codeGenerator;
+        private readonly IRandomCodeGenerator _codeGenerator;
 
-        public CodeGeneratorTests()
+        public RandomCodeGeneratorTests()
         {
-            _codeGenerator = new CodeGenerator();
+            _codeGenerator = new RandomCodeGenerator();
         }
 
         [Test]
@@ -24,21 +24,11 @@ namespace BullsAndCows.Tests
         }
 
         [Test]
-        public void CodeMustContainNumericCharactersOnly()
-        {
-            var code = _codeGenerator.Generate();
-
-            var isAllCharactersNumeric = code.All(Char.IsNumber);
-
-            Assert.True(isAllCharactersNumeric);
-        }
-
-        [Test]
         public void CodeMustNotContainTheNumberZero()
         {
             var code = _codeGenerator.Generate();
 
-            var isZeroDigitInCode = code.Any(c => c == '0');
+            var isZeroDigitInCode = code.Any(c => c == 0);
 
             Assert.False(isZeroDigitInCode);
         }

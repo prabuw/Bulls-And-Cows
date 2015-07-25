@@ -1,5 +1,7 @@
 ﻿
-namespace BullsAndCows.Core
+using BullsAndCows.Core.Models;
+
+namespace BullsAndCows.Core.Interfaces
 {
     public interface IVerifier
     {
