@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using BullsAndCows.Core.Interfaces;
+using BullsAndCows.Human.Interfaces;
 
-namespace BullsAndCows.Core
+namespace BullsAndCows.Human
 {
     public class GuessValidator : IGuessValidator
     {
@@ -15,9 +15,10 @@ namespace BullsAndCows.Core
 
             if (!isGuessValid.IsMatch(guess) || isThereReptitionWithinTheGuess.IsMatch(guess))
             {
-                throw new ArgumentException("Your guess is not in the valid format. It should be contain four unique digits, excluding zero.");
+                throw new ArgumentException(
+                    "Your guess is not in the valid format. It should be contain four unique digits, excluding zero.");
             }
-            
+
             return true;
         }
     }

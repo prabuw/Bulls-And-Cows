@@ -1,5 +1,4 @@
-﻿
-namespace BullsAndCows.Core.Models
+﻿namespace BullsAndCows.Human.Models
 {
     public class Guess
     {

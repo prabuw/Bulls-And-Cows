@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BullsAndCows.Core.Interfaces;
+using BullsAndCows.Human.Interfaces;
 
-namespace BullsAndCows.Core
+namespace BullsAndCows.Human
 {
     public class RandomCodeGenerator : IRandomCodeGenerator
     {
@@ -14,12 +14,13 @@ namespace BullsAndCows.Core
             _allowedNumbers = Enumerable.Range(1, 9);
         }
 
-        public int[] Generate()
+        public string Generate()
         {
             var seed = new Random();
-            var codeAsNumbers = _allowedNumbers.OrderBy(x => seed.Next()).Take(4).ToArray();
+            var codeAsNumbers = _allowedNumbers.OrderBy(x => seed.Next()).Take(4).Select(c => c.ToString());
+            var code = string.Join(string.Empty, codeAsNumbers);
 
-            return codeAsNumbers;
+            return code;
         }
     }
 }

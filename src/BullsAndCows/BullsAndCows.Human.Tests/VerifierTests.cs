@@ -1,15 +1,13 @@
 ﻿using System.Collections;
-using BullsAndCows.Core;
-using BullsAndCows.Core.Interfaces;
+using BullsAndCows.Human.Interfaces;
 using NUnit.Framework;
 
-namespace BullsAndCows.Tests
+namespace BullsAndCows.Human.Tests
 {
     [TestFixture]
     public class VerifierTests
     {
         private readonly IVerifier _verifier;
-
         private const string ExpectedCode = "1234";
 
         private static IEnumerable ValidBullGuesses
@@ -35,7 +33,6 @@ namespace BullsAndCows.Tests
                 yield return new TestCaseData("4321", 4);
             }
         }
-
 
         public VerifierTests()
         {

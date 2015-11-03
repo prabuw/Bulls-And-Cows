@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using BullsAndCows.Core;
-using BullsAndCows.Core.Interfaces;
+using BullsAndCows.Human.Interfaces;
 using NUnit.Framework;
 
-namespace BullsAndCows.Tests
+namespace BullsAndCows.Human.Tests
 {
     [TestFixture]
     public class GuessValidatorTests
@@ -60,28 +59,36 @@ namespace BullsAndCows.Tests
         }
 
         [TestCaseSource("InvalidFormatGuesses")]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Your guess is not in the valid format. It should be contain four unique digits, excluding zero.")]
+        [ExpectedException(typeof (ArgumentException),
+            ExpectedMessage =
+                "Your guess is not in the valid format. It should be contain four unique digits, excluding zero.")]
         public void Validate_ThrowsAnException_IfValueUsesInvalidCharacters(string value)
         {
-           _validator.Validate(value);
+            _validator.Validate(value);
         }
 
         [TestCaseSource("InvalidLengthGuesses")]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Your guess is not in the valid format. It should be contain four unique digits, excluding zero.")]
+        [ExpectedException(typeof (ArgumentException),
+            ExpectedMessage =
+                "Your guess is not in the valid format. It should be contain four unique digits, excluding zero.")]
         public void Validate_ThrowsAnException_IfValueUsesMoreThanFourValidCharacters(string value)
         {
             _validator.Validate(value);
         }
 
         [TestCaseSource("RepeatedValidCharacterGuesses")]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Your guess is not in the valid format. It should be contain four unique digits, excluding zero.")]
+        [ExpectedException(typeof (ArgumentException),
+            ExpectedMessage =
+                "Your guess is not in the valid format. It should be contain four unique digits, excluding zero.")]
         public void Validate_ThrowsAnException_IfValueContainsRepeatedNumbers(string value)
         {
             _validator.Validate(value);
         }
 
         [TestCaseSource("GuessesContainingZero")]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Your guess is not in the valid format. It should be contain four unique digits, excluding zero.")]
+        [ExpectedException(typeof (ArgumentException),
+            ExpectedMessage =
+                "Your guess is not in the valid format. It should be contain four unique digits, excluding zero.")]
         public void Validate_ThrowsAnException_IfValueContainsZero(string value)
         {
             _validator.Validate(value);

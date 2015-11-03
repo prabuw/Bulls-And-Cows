@@ -1,9 +1,8 @@
 ﻿using System.Linq;
-using BullsAndCows.Core;
-using BullsAndCows.Core.Interfaces;
+using BullsAndCows.Human.Interfaces;
 using NUnit.Framework;
 
-namespace BullsAndCows.Tests
+namespace BullsAndCows.Human.Tests
 {
     [TestFixture]
     public class RandomCodeGeneratorTests

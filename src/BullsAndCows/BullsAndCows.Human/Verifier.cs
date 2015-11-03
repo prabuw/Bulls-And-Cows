@@ -1,7 +1,7 @@
-﻿using BullsAndCows.Core.Interfaces;
-using BullsAndCows.Core.Models;
+﻿using BullsAndCows.Human.Interfaces;
+using BullsAndCows.Human.Models;
 
-namespace BullsAndCows.Core
+namespace BullsAndCows.Human
 {
     public class Verifier : IVerifier
     {

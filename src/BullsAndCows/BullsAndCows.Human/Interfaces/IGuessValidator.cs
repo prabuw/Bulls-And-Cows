@@ -1,4 +1,4 @@
-﻿namespace BullsAndCows.Core.Interfaces
+﻿namespace BullsAndCows.Human.Interfaces
 {
     public interface IGuessValidator
     {
