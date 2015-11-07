@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using BullsAndCows.Human.Interfaces;
 using BullsAndCows.Human.Models;
 using SimpleInjector;
@@ -10,11 +12,13 @@ namespace BullsAndCows.Console.Strategies
         private readonly string _randomCode;
         private readonly IRandomCodeGenerator _randomCodeGenerator;
         private readonly IVerifier _verifier;
+        private Queue<VerificationResult> _guessHistory; 
 
         public HumanStrategy(Container container)
         {
             _randomCodeGenerator = container.GetInstance<IRandomCodeGenerator>();
             _verifier = container.GetInstance<IVerifier>();
+            _guessHistory = new Queue<VerificationResult>();
 
             _randomCode = _randomCodeGenerator.Generate();
         }
@@ -22,7 +26,6 @@ namespace BullsAndCows.Console.Strategies
         public void Play()
         {
             var isGuessed = false;
-            var guessCount = 0;
 
             PrintIntro();
 
@@ -34,8 +37,8 @@ namespace BullsAndCows.Console.Strategies
                 try
                 {
                     var result = _verifier.Verify(_randomCode, rawGuess);
-                    guessCount++;
-
+                    _guessHistory.Enqueue(result);
+                    
                     PrintResult(result);
 
                     if (result.Bulls == 4)
@@ -47,8 +50,34 @@ namespace BullsAndCows.Console.Strategies
                 }
             } while (isGuessed == false);
 
-            System.Console.WriteLine("Congratulations - It took you {0} guesses!", guessCount);
+            PrintSummary(_guessHistory);
+           
+            
             System.Console.WriteLine();
+        }
+
+        private void PrintSummary(Queue<VerificationResult> guessHistory)
+        {
+            var guessCount = 0;
+            var paddedGuessCount = String.Empty;
+            var maxListingNumberLength = (int) (Math.Floor(Math.Log10(guessHistory.Count()) + 1) + 1);
+
+            System.Console.WriteLine("----------------------------------");
+            System.Console.WriteLine("    |  Guess  |  Bulls  |  Cows  |");
+            System.Console.WriteLine("----------------------------------");
+
+            while (guessHistory.Any())
+            {
+                var guess = guessHistory.Dequeue();
+                guessCount++;
+                paddedGuessCount = guessCount.ToString().PadLeft(maxListingNumberLength);
+
+                System.Console.WriteLine("{0}.|  {1}   |    {2}    |   {3}    |", paddedGuessCount, guess.Value, guess.Bulls, guess.Cows);
+            }
+
+            System.Console.WriteLine();
+            System.Console.WriteLine();
+            System.Console.WriteLine("Congratulations - It took you {0} guesses!", guessCount);
         }
 
         private void PrintResult(VerificationResult result)

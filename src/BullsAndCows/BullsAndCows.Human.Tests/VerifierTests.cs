@@ -39,6 +39,14 @@ namespace BullsAndCows.Human.Tests
             _verifier = new Verifier();
         }
 
+        [Test]
+        public void Verify_ReturnsValue()
+        {
+            var result = _verifier.Verify(ExpectedCode, "5678");
+
+            Assert.AreEqual("5678", result.Value);
+        }
+
         [TestCaseSource("ValidBullGuesses")]
         public void Verify_ReturnsCorrectNumberOfBulls(string guess, int expectedBullCount)
         {

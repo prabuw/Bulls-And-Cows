@@ -26,7 +26,7 @@ namespace BullsAndCows.Human
                 }
             }
 
-            return new VerificationResult(bulls, cows);
+            return new VerificationResult(guess.Value, bulls, cows);
         }
     }
 }
