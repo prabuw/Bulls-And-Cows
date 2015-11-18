@@ -13,8 +13,8 @@ namespace BullsAndCows.Console
         {
             var container = new Container();
 
-            //container.Register<IStrategy, HumanStrategy>();
-            container.Register<IStrategy, ComputerStrategy>();
+            container.Register<IHumanStrategy, HumanStrategy>();
+            container.Register<IComputerStrategy, ComputerStrategy>();
             container.Register<IGuessValidator, GuessValidator>();
             container.Register<IRandomCodeGenerator, RandomCodeGenerator>();
             container.Register<IVerifier, Verifier>();

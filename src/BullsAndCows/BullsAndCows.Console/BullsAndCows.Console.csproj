@@ -50,6 +50,8 @@
     <Compile Include="Bootstrap.cs" />
     <Compile Include="Strategies\ComputerStrategy.cs" />
     <Compile Include="Strategies\HumanStrategy.cs" />
+    <Compile Include="Strategies\IComputerStrategy.cs" />
+    <Compile Include="Strategies\IHumanStrategy.cs" />
     <Compile Include="Strategies\IStrategy.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

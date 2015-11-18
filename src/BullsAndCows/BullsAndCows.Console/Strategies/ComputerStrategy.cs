@@ -3,7 +3,7 @@ using BullsAndCows.Computer.Interfaces;
 
 namespace BullsAndCows.Console.Strategies
 {
-    internal class ComputerStrategy : IStrategy
+    internal class ComputerStrategy : IComputerStrategy
     {
         private readonly IGuessGenerator _guessGenerator;
 

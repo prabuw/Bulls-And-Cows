@@ -7,7 +7,7 @@ using SimpleInjector;
 
 namespace BullsAndCows.Console.Strategies
 {
-    internal class HumanStrategy : IStrategy
+    internal class HumanStrategy : IHumanStrategy
     {
         private readonly string _randomCode;
         private readonly IVerifier _verifier;
