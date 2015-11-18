@@ -66,14 +66,14 @@ namespace BullsAndCows.Computer
 
             if (guess.Bulls == 0 && guess.Cows == 0)
             {
-                AddInvalidDigits(_invalidDigits.Except(guess.Value));
+                AddInvalidDigits(guess.Value);
                 ClearCombinationsWithInvalidNumbers();
             }
             else if ((guess.Bulls + guess.Cows == 4) && !_fourDigitsFound)
             {
                 _fourDigitsFound = true;
 
-                AddInvalidDigits(_invalidDigits.Except(Source.Except(guess.Value)));
+                AddInvalidDigits(Source.Except(guess.Value));
                 ClearCombinationsWithInvalidNumbers();
             }
             else
@@ -117,8 +117,6 @@ namespace BullsAndCows.Computer
                         RemoveInvalidCode(isMatch);
                 }
             }
-
-            Console.WriteLine("  ({0})", _allCodes.Count);
         }
 
         private List<CodePattern> FillInPatterns(Guess guess, List<CodePattern> bullPatterns)
@@ -253,7 +251,7 @@ namespace BullsAndCows.Computer
 
         private void AddInvalidDigits(IEnumerable<int> digits)
         {
-            _invalidDigits.AddRange(_invalidDigits.Except(digits));
+            _invalidDigits.AddRange(digits.Except(_invalidDigits));
         }
     }
 }
