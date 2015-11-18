@@ -10,17 +10,16 @@ namespace BullsAndCows.Console.Strategies
     internal class HumanStrategy : IStrategy
     {
         private readonly string _randomCode;
-        private readonly IRandomCodeGenerator _randomCodeGenerator;
         private readonly IVerifier _verifier;
-        private Queue<VerificationResult> _guessHistory; 
+        private readonly Queue<VerificationResult> _guessHistory; 
 
         public HumanStrategy(Container container)
         {
-            _randomCodeGenerator = container.GetInstance<IRandomCodeGenerator>();
+            var randomCodeGenerator = container.GetInstance<IRandomCodeGenerator>();
             _verifier = container.GetInstance<IVerifier>();
             _guessHistory = new Queue<VerificationResult>();
 
-            _randomCode = _randomCodeGenerator.Generate();
+            _randomCode = randomCodeGenerator.Generate();
         }
 
         public void Play()
@@ -51,41 +50,10 @@ namespace BullsAndCows.Console.Strategies
             } while (isGuessed == false);
 
             PrintSummary(_guessHistory);
-           
             
             System.Console.WriteLine();
         }
-
-        private void PrintSummary(Queue<VerificationResult> guessHistory)
-        {
-            var guessCount = 0;
-            var paddedGuessCount = String.Empty;
-            var maxListingNumberLength = (int) (Math.Floor(Math.Log10(guessHistory.Count()) + 1) + 1);
-
-            System.Console.WriteLine("----------------------------------");
-            System.Console.WriteLine("    |  Guess  |  Bulls  |  Cows  |");
-            System.Console.WriteLine("----------------------------------");
-
-            while (guessHistory.Any())
-            {
-                var guess = guessHistory.Dequeue();
-                guessCount++;
-                paddedGuessCount = guessCount.ToString().PadLeft(maxListingNumberLength);
-
-                System.Console.WriteLine("{0}.|  {1}   |    {2}    |   {3}    |", paddedGuessCount, guess.Value, guess.Bulls, guess.Cows);
-            }
-
-            System.Console.WriteLine();
-            System.Console.WriteLine();
-            System.Console.WriteLine("Congratulations - It took you {0} guesses!", guessCount);
-        }
-
-        private void PrintResult(VerificationResult result)
-        {
-            System.Console.WriteLine("Bulls: {0} Cows: {1}", result.Bulls, result.Cows);
-            System.Console.WriteLine();
-        }
-
+        
         private static void PrintIntro()
         {
             System.Console.Clear();
@@ -104,6 +72,35 @@ namespace BullsAndCows.Console.Strategies
             System.Console.WriteLine();
             System.Console.WriteLine("Let's get going - Make a guess!");
             System.Console.WriteLine();
+        }
+
+        private void PrintResult(VerificationResult result)
+        {
+            System.Console.WriteLine("Bulls: {0} Cows: {1}", result.Bulls, result.Cows);
+            System.Console.WriteLine();
+        }
+
+        private void PrintSummary(Queue<VerificationResult> guessHistory)
+        {
+            var guessCount = 0;
+            var maxListingNumberLength = (int)(Math.Floor(Math.Log10(guessHistory.Count()) + 1) + 1);
+
+            System.Console.WriteLine("----------------------------------");
+            System.Console.WriteLine("    |  Guess  |  Bulls  |  Cows  |");
+            System.Console.WriteLine("----------------------------------");
+
+            while (guessHistory.Any())
+            {
+                var guess = guessHistory.Dequeue();
+                guessCount++;
+                var paddedGuessCount = guessCount.ToString().PadLeft(maxListingNumberLength);
+
+                System.Console.WriteLine("{0}.|  {1}   |    {2}    |   {3}    |", paddedGuessCount, guess.Value, guess.Bulls, guess.Cows);
+            }
+
+            System.Console.WriteLine();
+            System.Console.WriteLine();
+            System.Console.WriteLine("Congratulations - It took you {0} guesses!", guessCount);
         }
     }
 }

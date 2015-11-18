@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrap.cs" />
+    <Compile Include="Strategies\ComputerStrategy.cs" />
     <Compile Include="Strategies\HumanStrategy.cs" />
     <Compile Include="Strategies\IStrategy.cs" />
     <Compile Include="Program.cs" />
@@ -58,6 +59,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BullsAndCows.Computer\BullsAndCows.Computer.csproj">
+      <Project>{9d9db42e-3ea4-4d36-a333-384fa4858016}</Project>
+      <Name>BullsAndCows.Computer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BullsAndCows.Human\BullsAndCows.Human.csproj">
       <Project>{5fcac4a5-9e1f-408f-aeb8-20b45e8d288d}</Project>
       <Name>BullsAndCows.Human</Name>
